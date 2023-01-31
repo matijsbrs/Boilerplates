@@ -7,7 +7,7 @@
 # 
 AUTHOR="M. Behrens"
 DATE="31-1-2023"
-VERSION="v0.0.4"
+VERSION="v0.0.5"
 GIT="https://github.com/matijsbrs/Boilerplates"
 LICENSE="GNU General Public License v3.0"
 # 
@@ -21,6 +21,7 @@ LICENSE="GNU General Public License v3.0"
 # Version 0.0.2 added support for self update
 # v0.0.3 after the update the script is made executable
 # v0.0.4 buf fixes
+# v0.0.5 more small bug fixes
 
 FILE=""
 GIT_TAG_VERSION=`git tag | tail -n 1`
@@ -79,7 +80,10 @@ while getopts 'f:vpchi:m:u' opt; do
       update_version_field $FILE $NEW_TAG
       ;;
     c) 
-        git commit -a -m $MESSAGE
+        git add . 
+        echo git commit -m "$MESSAGE"
+
+        git commit -m "$MESSAGE"
         ;;
 
     p)
@@ -123,7 +127,7 @@ while getopts 'f:vpchi:m:u' opt; do
                 echo "Please use -m 'message' before -i argument. "
             else  
                 echo "New tag: " $NEW_TAG
-                echo git tag -a $NEW_TAG -m $MESSAGE
+                git tag -a $NEW_TAG -m "$MESSAGE"
             fi
       fi
       ;;
