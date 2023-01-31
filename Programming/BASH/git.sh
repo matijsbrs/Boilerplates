@@ -148,7 +148,8 @@ while getopts 'f:vpchi:m:u' opt; do
       echo " -i 'b' | 'build' Increment the build counter with 1"
       echo " -u               Upgrade to the latested version of git.sh"
       echo ""
-      echo " Example: ./git.sh -m \"New minor with improvements\" -i m -v -c -p" 
+      echo " Example: ./git.sh -m \"New minor with improvements\" -i m -c -v -p" 
+      echo " Example: ./git.sh -m \"New build\" -i b -c -v -p" 
       exit 1
       ;;
   esac
