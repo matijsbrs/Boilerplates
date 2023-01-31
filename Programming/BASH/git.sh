@@ -8,6 +8,8 @@
 AUTHOR="M. Behrens"
 DATE="31-1-2023"
 VERSION="v0.0.2"
+GIT="https://github.com/matijsbrs/Boilerplates"
+LICENSE="GNU General Public License v3.0"
 # 
 # when authentication is needed I recommend using the credential helper.
 # $ git config credential.helper store
