@@ -7,7 +7,7 @@
 # 
 AUTHOR="M. Behrens"
 DATE="31-1-2023"
-VERSION="v0.0.3"
+VERSION="v0.0.4"
 GIT="https://github.com/matijsbrs/Boilerplates"
 LICENSE="GNU General Public License v3.0"
 # 
@@ -20,6 +20,7 @@ LICENSE="GNU General Public License v3.0"
 #
 # Version 0.0.2 added support for self update
 # v0.0.3 after the update the script is made executable
+# v0.0.4 buf fixes
 
 FILE=""
 GIT_TAG_VERSION=`git tag | tail -n 1`
@@ -30,11 +31,12 @@ update_version_field () {
     echo "Sync version field in '$1' with git_tag '$2'."
     sed -i 's/_version.*=.*/_version = "'$2'"/g' $1
     sed -i 's/_date.*=.*/_date = "'`date  +%d%m%Y`'"/g' $1
+    echo "done"
 }
 
 
 
-while getopts 'f:vpc:hi:m:u' opt; do
+while getopts 'f:vpchi:m:u' opt; do
   case "$opt" in
     u)
         curl "https://raw.githubusercontent.com/matijsbrs/Boilerplates/main/Programming/BASH/git.sh" -o "git.sh.new"
@@ -76,6 +78,9 @@ while getopts 'f:vpc:hi:m:u' opt; do
     v)
       update_version_field $FILE $NEW_TAG
       ;;
+    c) 
+        git commit -a -m $MESSAGE
+        ;;
 
     p)
       if [ $NEW_TAG != $GIT_TAG_VERSION ] 
@@ -122,10 +127,7 @@ while getopts 'f:vpc:hi:m:u' opt; do
             fi
       fi
       ;;
-    i)
-      arg="$OPTARG"
-      echo "increatement '${OPTARG}' argument"
-      ;;
+
    
     ?|h)
       echo "Git support script by $AUTHOR $VERSION $DATE"
