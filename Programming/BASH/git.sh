@@ -7,7 +7,7 @@
 # 
 AUTHOR="M. Behrens"
 DATE="31-1-2023"
-VERSION="v0.0.2"
+VERSION="v0.0.3"
 GIT="https://github.com/matijsbrs/Boilerplates"
 LICENSE="GNU General Public License v3.0"
 # 
@@ -18,7 +18,8 @@ LICENSE="GNU General Public License v3.0"
 #
 # You now can work the rest of the day without typing your credentials. ;-)
 #
-# Version 0.0.2 added support for upgrade 
+# Version 0.0.2 added support for self update
+# v0.0.3 after the update the script is made executable
 
 FILE=""
 GIT_TAG_VERSION=`git tag | tail -n 1`
@@ -56,6 +57,7 @@ while getopts 'f:vpc:hi:m:u' opt; do
                     echo "local version is stored as git.sh.old"
                     mv git.sh git.sh.old
                     mv git.sh.new git.sh
+                    chmod a+x git.sh
                     ;;
                 [nN] ) 
                     echo "stopping"
