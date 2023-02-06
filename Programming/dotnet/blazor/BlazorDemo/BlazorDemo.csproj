@@ -10,4 +10,8 @@
     <PackageReference Include="MysqlConnector" Version="2.2.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataLibrary\DataLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

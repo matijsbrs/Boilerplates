@@ -1,5 +1,4 @@
 using BlazorDemo.Models;
-using BlazorDemo.Shared.Models;
 using MySqlConnector;
 using System.Data;
 

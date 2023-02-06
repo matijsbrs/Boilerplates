@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorDemo.Data;
 using BlazorDemo.Models;
+using DataLibrary;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<meterstandenConnections>();
+builder.Services.AddSingleton<IDataAccess, DataAccess>();
 
 MySql_Helper.conStr = builder.Configuration["ConnectionStrings:DefaultConnection"];
 
@@ -29,7 +31,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
