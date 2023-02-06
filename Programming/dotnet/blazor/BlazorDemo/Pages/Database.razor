@@ -1,6 +1,45 @@
 ﻿@page "/database"
+@using BlazorDemo.Shared.Models
+@inject BlazorDemo.Data.meterstandenConnections meterService
 
 <PageTitle>Database</PageTitle>
 
-<h1>mysql connection</h1>
+<h1>Mysql Connection 2</h1>
 
+@if (standen == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in standen)
+            {
+                <tr>
+                    <td>@forecast.TimeStamp</td>
+                    <td>@forecast.KWh1</td>
+                    <td>@forecast.KWh2</td>
+                    <td>@forecast.m3gas</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Meterstanden[]? standen;
+
+    protected override async Task OnInitializedAsync()
+    {
+        standen = await meterService.GetMeterstandensAsync();
+    }
+}
