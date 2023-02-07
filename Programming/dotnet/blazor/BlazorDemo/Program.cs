@@ -13,7 +13,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<meterstandenConnections>();
 builder.Services.AddSingleton<IDataAccess, DataAccess>();
 
-MySql_Helper.conStr = builder.Configuration["ConnectionStrings:DefaultConnection"];
+MySql_Helper.conStr = builder.Configuration["ConnectionStrings:Default"];
 
 
 var app = builder.Build();
@@ -26,7 +26,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
+var webSocketOptions = new WebSocketOptions
+{
+    KeepAliveInterval = TimeSpan.FromMinutes(2)
+};
+app.UseWebSockets(webSocketOptions);
 
 app.UseStaticFiles();
 

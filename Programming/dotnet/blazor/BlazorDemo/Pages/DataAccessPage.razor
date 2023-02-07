@@ -14,11 +14,11 @@
 
 
 <button class="btn btn-primary" @onclick="Download_History">Load history</button>
-<button class="btn btn-primary" onclick="document.getElementById('table').innerHTML='';">Clear history</button>
+<button class="btn btn-primary" @onclick="Clear_History">Clear history</button>
 
 @if (_meterstanden == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>No data</em></p>
 }
 else
 {
@@ -56,10 +56,14 @@ else
         _meterstanden = await _data.LoadData<Meterstanden, dynamic>(sql, new {}, conn);
     } *@
 
-    private async Task Download_History() {
+    private async Task Clear_History() {
         _meterstanden = null;
+    }
+
+    private async Task Download_History() {
         string sql = "select * from Meterstanden";
-        string conn = _config.GetConnectionString("DefaultConnection");
+        string conn = _config.GetConnectionString("Default");
         _meterstanden = await _data.LoadData<Meterstanden, dynamic>(sql, new {}, conn);
+        
     }
 }
