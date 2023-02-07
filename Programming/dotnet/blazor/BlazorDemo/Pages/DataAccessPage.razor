@@ -6,9 +6,15 @@
 
 <PageTitle>Data Access</PageTitle>
 
+
+
 <h1>Data Access demo</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
+
+
+<button class="btn btn-primary" @onclick="Download_History">Load history</button>
+<button class="btn btn-primary" onclick="document.getElementById('table').innerHTML='';">Clear history</button>
 
 @if (_meterstanden == null)
 {
@@ -16,7 +22,7 @@
 }
 else
 {
-    <table class="table">
+    <table class="table" id="table">
         <thead>
             <tr>
                 <th>Date</th>
@@ -40,12 +46,18 @@ else
         </tbody>
     </table>
 }
-
 @code {
-    private List<Meterstanden> _meterstanden;
+    private List<Meterstanden>? _meterstanden;
 
-    protected override async Task OnInitializedAsync()
+    @* protected override async Task OnInitializedAsync() 
     {
+        string sql = "select * from Meterstanden";
+        string conn = _config.GetConnectionString("DefaultConnection");
+        _meterstanden = await _data.LoadData<Meterstanden, dynamic>(sql, new {}, conn);
+    } *@
+
+    private async Task Download_History() {
+        _meterstanden = null;
         string sql = "select * from Meterstanden";
         string conn = _config.GetConnectionString("DefaultConnection");
         _meterstanden = await _data.LoadData<Meterstanden, dynamic>(sql, new {}, conn);
